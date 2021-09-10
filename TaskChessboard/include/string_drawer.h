@@ -16,6 +16,7 @@ public:
   // Provide target board to draw and a reference to a target string to draw on. 
   // The string WILL be modified.
   StringDrawer(const ChessBoard* board, std::string& target_string);
+  ~StringDrawer();
   // Draws the board onto the target string. The string will be modified
   void draw();
 };

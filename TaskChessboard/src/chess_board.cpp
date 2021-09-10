@@ -1,13 +1,17 @@
 #include "chess_board.h"
 #include <stdexcept>
 
-ChessBoard::ChessBoard(int width, int height) 
-  : width_(width), height_(height) {
-    pieces_ = new ChessPiece*[width_];
-    for (int i = 0; i < width_; i++) {
+ChessBoard::ChessBoard(int width, int height) {
+  if (width <= 0 || height <= 0)
+    throw std::invalid_argument("Size of " + std::to_string(width) + "*" + 
+      std::to_string(height) + " is invalid. Each dimention must be > 0.");
+  width_ = width;
+  height_ = height; 
+  pieces_ = new ChessPiece*[width_];
+  for (int i = 0; i < width_; i++) {
       pieces_[i] = new ChessPiece[height_] { NONE };
-    }
   }
+}
 
 ChessBoard::~ChessBoard() {
   for (int i = 0; i < width_; i++) {

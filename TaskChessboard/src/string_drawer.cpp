@@ -16,6 +16,8 @@ const std::vector<std::map<ChessPiece, char>> StringDrawer::pieces_chars {
 StringDrawer::StringDrawer(const ChessBoard* board, std::string& target_string) 
 : ChessBoardDrawer(board), target_(target_string) {}
 
+StringDrawer::~StringDrawer() {}
+
 void StringDrawer::draw() {
   target_.clear();
   int w = board_->get_width(), h = board_->get_height();

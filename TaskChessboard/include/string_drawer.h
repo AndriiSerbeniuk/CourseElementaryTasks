@@ -10,7 +10,7 @@ private:
   // Target string
   std::string& target_;
   // Instructions on how to draw each ChessPiece
-  static const std::vector<std::map<ChessPiece, char>> pieces_chars;
+  static const std::vector<std::map<ChessPieceType, char>> pieces_chars;
 
 public:
   // Provide target board to draw and a reference to a target string to draw on. 

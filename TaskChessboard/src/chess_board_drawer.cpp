@@ -8,8 +8,6 @@ ChessBoardDrawer::ChessBoardDrawer(const ChessBoard* board)
 
 ChessBoardDrawer::~ChessBoardDrawer() {}
 
-void ChessBoardDrawer::draw() {}
-
 bool ChessBoardDrawer::starts_white() const {
   return start_white_;
 }

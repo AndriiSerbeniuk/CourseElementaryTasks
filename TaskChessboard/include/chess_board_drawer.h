@@ -14,9 +14,9 @@ public:
   ChessBoardDrawer();
   ChessBoardDrawer(const ChessBoard* board);
   virtual ~ChessBoardDrawer();
-  // Doesn't do anything in the base class. The idea is to switch between
+  // The idea is to switch between
   // drawing black and white squares depending on its index.
-  virtual void draw();
+  virtual void draw() = 0;
   // Returns true if the first drawn square wil be white, false if black.
   bool starts_white() const;
   // Set to true if the first drawn square is supposed to be white, false if black.

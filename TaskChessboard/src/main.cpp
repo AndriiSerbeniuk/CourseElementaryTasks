@@ -5,7 +5,8 @@ int main() {
 	ChessBoard board(8, 8);		// Create a blank board
 	std::string drawn_board;	// String the board will be drawn on
 	
-	board.set_piece(1,1, PAWN);
+	board.set_piece(1, 1, CHESS_PAWN, false);
+	board.set_piece(5, 4, CHESS_PAWN, true);
 	StringDrawer drawer(&board, drawn_board);
 	drawer.draw();
 	std::cout << drawn_board << "\n\n";

@@ -73,8 +73,11 @@ void NumberSpeller::form_3_digit(int num, int order) {
   int hundred = num / 100, rest = num % 100;
   // Form continuation first
   form_2_digit(rest, order);
-  if (hundred)
+  if (hundred) {
+    if (!rest && order)
+      form_1_digit(0, order);
     spelled_ = (*hundreds_)[hundred] + (" " + spelled_);
+  }
 }
 
 void NumberSpeller::form_2_digit(int num, int order) {

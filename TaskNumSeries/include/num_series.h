@@ -20,8 +20,8 @@ class NumSeries {
          const float& top);
         virtual ~SeriesNumGenerator() = default;
 
-        virtual float get_next_top() const;
-        virtual float get_next_bottom() const;
+        virtual float get_next_top();
+        virtual float get_next_bottom();
         virtual void init_series();
         virtual bool can_set_top(float number) const;
         virtual bool can_set_bottom(float number) const;

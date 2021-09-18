@@ -4,7 +4,7 @@
 SquaredLessSeries::SquaredGenerator::SquaredGenerator(std::deque<float>& series,
   const float& bottom, const float& top) : SeriesNumGenerator(series, bottom, top) {}
 
-float SquaredLessSeries::SquaredGenerator::get_next_bottom() const {
+float SquaredLessSeries::SquaredGenerator::get_next_bottom() {
   float next_bottom = SeriesNumGenerator::get_next_bottom();
   if (next_bottom > 0)
     return next_bottom;

@@ -18,8 +18,8 @@ class SquaredLessSeries : public NumSeries {
         SquaredGenerator(std::deque<float>& series, const float& bottom, const float& top);
         virtual ~SquaredGenerator() = default;
         // Default implementation already suits the task
-        //float get_next_top() const;
-        float get_next_bottom() const;
+        //float get_next_top();
+        float get_next_bottom();
         void init_series();
         bool can_set_top(float number) const;
         bool can_set_bottom(float number) const;

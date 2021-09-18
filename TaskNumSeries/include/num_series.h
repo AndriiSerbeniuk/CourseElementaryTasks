@@ -2,23 +2,23 @@
 #include <deque>
 #include <memory>
 
-class MutNumSeries {
+class NumSeries {
 	public:
-    virtual ~MutNumSeries();
-
     const std::deque<float>& get_series() const;
     virtual void set_limits(float bottom_limit, float top_limit);
     virtual void set_top_limit(float limit);
     virtual void set_bottom_limit(float limit);
 
 	protected:
-    MutNumSeries();
-    MutNumSeries(float bottom_lim, float top_lim);
-    class SeriesNumValidator {
+    NumSeries();
+    NumSeries(float bottom_lim, float top_lim);
+    virtual ~NumSeries() = default;
+
+    class SeriesNumGenerator {
       public:
-        SeriesNumValidator(std::deque<float>& series, const float& botton,
+        SeriesNumGenerator(std::deque<float>& series, const float& botton,
          const float& top);
-        virtual ~SeriesNumValidator();
+        virtual ~SeriesNumGenerator() = default;
 
         virtual float get_next_top() const;
         virtual float get_next_bottom() const;
@@ -36,12 +36,12 @@ class MutNumSeries {
     float top_lim_;
     float bottom_lim_;
 
-    void set_validator(SeriesNumValidator* validator);
+    void set_generator(SeriesNumGenerator* generator);
+    void adjust_series();
 
 	private:
-    std::unique_ptr<SeriesNumValidator> validator_;
+    SeriesNumGenerator* generator_;
 
-    void adjust_series();
     bool add_top();
     bool add_bottom();
     void trim_top();

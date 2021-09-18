@@ -1,20 +1,18 @@
 #include "squared_less_series.h"
 
-SquaredLessSeries::SquaredLessSeries() : MutNumSeries() {
-  // New here is ok because it's assigned to a smart pointer
-  set_validator(new SquaredValidator(series_, bottom_lim_, top_lim_));
-}
+SquaredLessSeries::SquaredLessSeries() : NumSeries(),
+  sqr_generator_(series_, bottom_lim_, top_lim_) {
+    set_generator(&sqr_generator_);
+  }
 
-SquaredLessSeries::SquaredLessSeries(int limit) : MutNumSeries(1, limit) {
-  // New here is ok because it's assigned to a smart pointer
-  set_validator(new SquaredValidator(series_, bottom_lim_, top_lim_));
-  set_limit(limit);
+SquaredLessSeries::SquaredLessSeries(int limit) : NumSeries(1, limit),
+  sqr_generator_(series_, bottom_lim_, top_lim_) {
+  set_generator(&sqr_generator_);
+  adjust_series();
 }
-
-SquaredLessSeries::~SquaredLessSeries() {}
 
 void SquaredLessSeries::set_limit(int limit) {
-  MutNumSeries::set_top_limit(limit);
+  NumSeries::set_top_limit(limit);
 }
 
 void SquaredLessSeries::set_limits(float bottom_limit, float top_limit) {}

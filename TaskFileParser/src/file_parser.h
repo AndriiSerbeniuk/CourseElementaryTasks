@@ -1,8 +1,11 @@
 #pragma once
-#include <string>
+#include <string.h>
+#include <fstream>
+#include <vector>
 
 class FileParser {
   public:
+    FileParser(const std::string& path);
     
     // find_line() and increment counter while !EOF
     int count_instances(const std::string& line);
@@ -12,6 +15,6 @@ class FileParser {
 
   private:
     std::string path_;
-
-    fpos_t find_line(fpos_t start_pos, const std::string& line);
+    
+    int find_line(std::ifstream& file, const char* line);
 };

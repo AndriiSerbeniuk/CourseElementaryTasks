@@ -31,7 +31,7 @@ void FileReplacer::process()
         throw std::ios_base::failure("Couldn't create a temporary file");
     }
     rfile.seekg(0);
-    int buf_size, start_pos = 0;
+    int start_pos = 0;
     int copy_len, line_len = original_line_.length();
     char* buf;
     // Copy unmodified contents, skip previously found lines

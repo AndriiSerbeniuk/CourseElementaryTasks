@@ -1,22 +1,25 @@
-CXX       := g++
-CXX_FLAGS := -std=c++17 -ggdb
+CXX      := g++
+CXXFLAGS := -std=c++17 -ggdb -Wall
 
-BIN     := bin
+BUILD   := $(shell pwd)/build
 SRC     := src
 INCLUDE := headers
 
-LIBRARIES   :=
-EXECUTABLE  := main
+# LIBRARIES   :=
+EXECUTABLE  := app
 
+export BUILD
+export CXX
+export CXXFLAGS
 
-all: $(BIN)/$(EXECUTABLE)
+.PHONY: clean all
 
-run: clean all
-	clear
-	./$(BIN)/$(EXECUTABLE)
+all: setup $(BUILD)/*.o
+	$(CXX) $(CXXFLAGS) $(shell find $(BUILD)/ -type f -name \*.o) -o $(BUILD)/$(EXECUTABLE)
 
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) $^ -o $@ $(LIBRARIES)
+setup:
+	$(MAKE) -C $(SRC)
 
 clean:
-	-rm $(BIN)/*
+	-rm $(BUILD)/*
+

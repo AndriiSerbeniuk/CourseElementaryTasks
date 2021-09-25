@@ -1,5 +1,5 @@
 #include <iostream>
-#include "file_parser.h"
+#include "parser_factory.hpp"
 
 int main(int argc, const char** argv)
 {
@@ -12,28 +12,35 @@ int main(int argc, const char** argv)
         return 0;
     }
 
-    FileParser fp(argv[1]);
+    ParserFactory pf;
+    FileParser* parser;
     switch (argc)
     {
     case 3:
     {
         try
         {
-            int c = fp.count_instances(argv[2]);
-            std::cout << "\"" << argv[2] << "\" was met " << c << " times.";
+            int count;
+            parser = pf.get_counter(argv[1], argv[2], count);
+            parser->process();
+            std::cout << "\"" << argv[2] << "\" was met " << count << " times.";
+            delete parser;
         }
         catch(const std::exception& e)
         {
-            std::cerr << "Error while working with the file.";
+            std::cerr << "Error while working with the file: "
+                << e.what();
         }
     }
         break;
     case 4:
         try
         {
-            fp.replace(argv[2], argv[3]);
+            parser = pf.get_replaser(argv[1], argv[2], argv[3]);
+            parser->process();
             std::cout << "All \"" << argv[2] << "\" instances have been" 
                 << " replaced with \"" << argv[3] << "\"";
+            delete parser;
         }
         catch(const std::exception& e)
         {

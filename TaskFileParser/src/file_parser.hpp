@@ -8,17 +8,19 @@
 class FileParser 
 {
     public:
-        FileParser(std::string path);
+        FileParser(const std::string& path);
+        virtual ~FileParser() = default;
         
         std::string get_path() const;
-        void set_path(std::string path);
+        void set_path(const std::string& path);
 
         // Counts how many times a line is present in the file
-        int count_instances(const std::string& line);
+        //int count_instances(const std::string& line);
         // Replaces all instances of one line with another line
-        void replace(const std::string& original, const std::string& replacement);
+        //void replace(const std::string& original, const std::string& replacement);
 
-    private:
+        virtual void process() = 0;
+    protected:
         // Buffer size for file reading
         static const int kBufSize;
         // Path to the file

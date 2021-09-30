@@ -1,7 +1,9 @@
 #include "MoscowTicket.hpp"
 
 MoscowTicket::MoscowTicket(int number) : LuckyTicket(number) 
-{}
+{
+    CheckLucky();
+}
 
 void MoscowTicket::CheckLucky()
 {

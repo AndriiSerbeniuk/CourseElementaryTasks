@@ -1,7 +1,9 @@
 #include "PiterTicket.hpp"
 
 PiterTicket::PiterTicket(int number) : LuckyTicket(number)
-{}
+{
+    CheckLucky();
+}
 
 void PiterTicket::CheckLucky()
 {

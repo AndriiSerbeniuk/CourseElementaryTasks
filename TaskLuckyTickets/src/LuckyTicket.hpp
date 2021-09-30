@@ -13,7 +13,7 @@ public:
 
 protected:
     // Should implement a check and assign it to m_is_lucky
-    virtual void CheckLucky() = 0;
+    virtual void CheckLucky() = 0;  // TODO: change methods invocations so that it's more straightforward to inherit this class
     // Divides a number into digits.
     std::vector<int> DivideToDigits(int number) const;
 

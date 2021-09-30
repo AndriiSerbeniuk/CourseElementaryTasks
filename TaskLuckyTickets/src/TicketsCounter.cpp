@@ -1,33 +1,21 @@
 #include "TicketsCounter.hpp"
 
-TicketsCounter::TicketsCounter() : m_tickets(), m_lucky_count(0) {}
-
-TicketsCounter::TicketsCounter(const std::vector<int>& tickets) : m_tickets(tickets)
+int TicketsCounter::Count(const std::vector<int>& tickets_nums, TicketCity city)
 {
-    Count();
-}
+    int lucky_count = 0;
+    TicketsFactory factory;
+    std::vector<std::unique_ptr<LuckyTicket>> tickets(factory.GetTickets(tickets_nums, city));
+    auto ticket = tickets.cbegin();
+    auto tickets_end = tickets.cend();
 
+    while (ticket != tickets_end)
+    {
+        if ((*ticket)->IsLucky())
+        {
+            lucky_count++;
+        }
+        ticket++;
+    }
 
-int TicketsCounter::get_lucky_count() const
-{
-    return m_lucky_count;
-}
-
-std::vector<int> TicketsCounter::get_tickets() const
-{
-    return m_tickets;
-}
-
-void TicketsCounter::set_tickets(const std::vector<int> tickets)
-{
-    m_tickets = tickets;
-    Count();
-}
-
-
-
-
-void TicketsCounter::Count()
-{
-    
+    return lucky_count;
 }

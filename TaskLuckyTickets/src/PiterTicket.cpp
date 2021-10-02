@@ -1,36 +1,34 @@
 #include "PiterTicket.hpp"
 
-PiterTicket::PiterTicket(int number) : LuckyTicket(number)
-{
-    CheckLucky();
-}
+const int PiterTicket::s_lucky_length = 6;
 
-void PiterTicket::CheckLucky()
-{
-    m_is_lucky = false;
-    std::vector<int> digits = DivideToDigits(m_number);
+PiterTicket::PiterTicket(unsigned int number) : LuckyTicket(number)
+{}
 
-    if (digits.size() != s_lucky_length)
+bool PiterTicket::IsLucky() const
+{
+    bool is_lucky = false;
+    if (m_number.size() == s_lucky_length)
     {
-        return;
-    }
+        int even_sum = 0;
+        int odd_sum = 0;
 
-    int even_sum = 0,
-        odd_sum = 0;
+        for (char digit : m_number)
+        {
+            if (digit % 2)
+            {
+                odd_sum += digit;
+            }
+            else
+            {
+                even_sum += digit;
+            }
+        }
+        if (even_sum == odd_sum)
+        {
+            is_lucky = true;
+        }
+    }
     
-    for (char digit : digits)
-    {
-        if (digit % 2)
-        {
-            odd_sum += digit;
-        }
-        else
-        {
-            even_sum += digit;
-        }
-    }
-    if (even_sum == odd_sum)
-    {
-        m_is_lucky = true;
-    }
+    return is_lucky;
 }

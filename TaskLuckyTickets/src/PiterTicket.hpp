@@ -4,8 +4,10 @@
 class PiterTicket : public LuckyTicket
 {
 public:
-    PiterTicket(int number);
+    PiterTicket(unsigned int number);
 
-protected:
-    void CheckLucky() override;
+    bool IsLucky() const override;
+
+private:
+    static const int s_lucky_length;
 };

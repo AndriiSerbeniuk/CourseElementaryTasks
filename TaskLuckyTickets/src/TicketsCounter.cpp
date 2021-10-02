@@ -1,10 +1,17 @@
 #include "TicketsCounter.hpp"
 
-int TicketsCounter::Count(const std::vector<int>& tickets_nums, TicketCity city)
+int TicketsCounter::Count(const std::vector<int>& tickets_nums, const std::string& city)
 {
     int lucky_count = 0;
     TicketsFactory factory;
-    std::vector<std::unique_ptr<LuckyTicket>> tickets(factory.GetTickets(tickets_nums, city));
+    TicketCity city_index = factory.GetCity(city);
+    if (city_index == -1)
+    {
+        throw std::invalid_argument("TicketsCounter::Count: The city is invalid");
+    }
+
+
+    std::vector<std::unique_ptr<LuckyTicket>> tickets(factory.GetTickets(tickets_nums, city_index));
     auto ticket = tickets.cbegin();
     auto tickets_end = tickets.cend();
 
@@ -12,9 +19,9 @@ int TicketsCounter::Count(const std::vector<int>& tickets_nums, TicketCity city)
     {
         if ((*ticket)->IsLucky())
         {
-            lucky_count++;
+            ++lucky_count;
         }
-        ticket++;
+        ++ticket;
     }
 
     return lucky_count;

@@ -4,8 +4,10 @@
 class MoscowTicket : public LuckyTicket
 {
 public:
-    MoscowTicket(int number);
+    MoscowTicket(unsigned int number);
 
-protected:
-    void CheckLucky() override;
+    bool IsLucky() const override;
+
+private:
+    static const int s_lucky_length;
 };

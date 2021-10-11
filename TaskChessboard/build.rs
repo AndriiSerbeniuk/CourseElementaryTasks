@@ -5,8 +5,7 @@ fn main()
     println!("cargo:rerun-if-changed=includes.hpp");
 
     // Library compilation
-    let mut source_files = vec![
-        //"main".to_string(), 
+    let mut source_files = vec![ 
         "chess_board".to_string(), 
         "chess_board_drawer".to_string(), 
         "string_drawer".to_string()];
@@ -17,7 +16,7 @@ fn main()
         filename.insert_str(0, &files_folder);
         filename.push_str(&files_extension);
     }
-    //source_files.push("TaskChessboardCpp/src/main.cpp".to_owned());
+    source_files.push("TaskChessboardCpp/AccessFuncs.cpp".to_owned());
 
     cc::Build::new()
         .cpp(true)
@@ -25,7 +24,7 @@ fn main()
         .compile("ChessBoard");
 
     // Library binding
-    let bindings = bindgen::Builder::default()
+    bindgen::Builder::default()
         .header("includes.hpp")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         .generate()

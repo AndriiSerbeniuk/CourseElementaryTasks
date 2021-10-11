@@ -11,6 +11,8 @@ public:
     float get_area() const;
     std::string get_name() const;
 
+    operator std::string() const;
+
 private:
     std::string m_name;
     float m_area;

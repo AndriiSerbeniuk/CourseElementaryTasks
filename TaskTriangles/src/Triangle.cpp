@@ -21,6 +21,11 @@ std::string Triangle::get_name() const
     return m_name;
 }
 
+Triangle::operator std::string() const
+{
+    return "[" + m_name + "]: " + std::to_string(m_area) + " cm";
+}
+
 bool operator > (const Triangle& first, const Triangle& second)
 {
     return first.get_area() > second.get_area();
@@ -30,3 +35,4 @@ bool operator < (const Triangle& first, const Triangle& second)
 {
     return first.get_area() < second.get_area();
 }
+

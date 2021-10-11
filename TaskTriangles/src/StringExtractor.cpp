@@ -3,27 +3,19 @@
 #include <algorithm>
 #include "StringExtractor.hpp"
 
-StringExtractor::StringExtractor(const StringArgs& args) : ITriangleArgsExtractor()
+std::string StringExtractor::ExtractName(const IExtractorArgs* args) const 
 {
-    m_args = args;
-}
-
-void StringExtractor::SetArgs(const IExtractorArgs*& args)
-{
+    const char *arg_start, *arg_end;
     try
     {
         StringArgs* str_args = (StringArgs*)args;
-        m_args.triangle_text = str_args->triangle_text;
+        arg_start = str_args->triangle_text.c_str(), arg_end = arg_start;
     }
     catch(const std::exception& e)
     {
         throw std::invalid_argument("StringExtractor requires StringArgs implementation of IExtractorArgs");
     }
-}
 
-std::string StringExtractor::ExtractName() const 
-{
-    const char* arg_start = m_args.triangle_text.c_str(), *arg_end = arg_start;
     std::string name;
 
     // Name should be written first
@@ -42,10 +34,20 @@ std::string StringExtractor::ExtractName() const
     return name;
 }
 
-std::vector<float> StringExtractor::ExtractSides() const
+std::vector<float> StringExtractor::ExtractSides(const IExtractorArgs* args) const
 {
-    const char* arg_start = m_args.triangle_text.c_str(), *arg_end = arg_start;
-    std::vector<std::string> args;
+    const char *arg_start, *arg_end;
+    try
+    {
+        StringArgs* str_args = (StringArgs*)args;
+        arg_start = str_args->triangle_text.c_str(), arg_end = arg_start;
+    }
+    catch(const std::exception& e)
+    {
+        throw std::invalid_argument("StringExtractor requires StringArgs implementation of IExtractorArgs");
+    }
+
+    std::vector<std::string> extracted_args;
     std::string cur_arg;
 
     // Exclude the name
@@ -64,17 +66,17 @@ std::vector<float> StringExtractor::ExtractSides() const
         else 
           cur_arg.assign(arg_start);  
         Trim(cur_arg);
-        args.push_back(cur_arg);
+        extracted_args.push_back(cur_arg);
         arg_start = arg_end + 1;
     }
 
-    if (args.size() < 3)
+    if (extracted_args.size() < 3)
     {
         throw std::invalid_argument("Too few sides provided.");
     }
     else
     {
-        if (args.size() > 3)
+        if (extracted_args.size() > 3)
         {
             throw std::invalid_argument("Too many sides provided.");
         }
@@ -83,9 +85,9 @@ std::vector<float> StringExtractor::ExtractSides() const
     // Parse the sides
     std::vector<float> sides(3);
 
-    sides[0] = ProcessSide(args[0]);
-    sides[1] = ProcessSide(args[1]);
-    sides[2] = ProcessSide(args[2]);
+    sides[0] = ProcessSide(extracted_args[0]);
+    sides[1] = ProcessSide(extracted_args[1]);
+    sides[2] = ProcessSide(extracted_args[2]);
 
     return sides;
 }

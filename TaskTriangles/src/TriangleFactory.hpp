@@ -5,5 +5,6 @@ class TriangleFactory : public ITriangleFactory
 {
 public:
     ITriangle* GetTriangle(
-        ITriangleArgsExtractor* extractor) const override;
+        const IExtractorArgs* args,
+        const ITriangleArgsExtractor* extractor) const override;
 };

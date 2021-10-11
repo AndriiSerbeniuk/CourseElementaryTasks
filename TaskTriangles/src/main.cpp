@@ -12,8 +12,8 @@ int main() {
     TriangleFactory factory;
     StringArgs args;
     args.triangle_text = "\t    triangle 1, 3, 4, 5";
-    StringExtractor extractor(args);
-    Triangle* triangle = (Triangle*)factory.GetTriangle(&extractor);
+    StringExtractor extractor;
+    Triangle* triangle = (Triangle*)factory.GetTriangle(&args, &extractor);
 
     delete triangle;
 

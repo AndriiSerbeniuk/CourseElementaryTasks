@@ -9,6 +9,7 @@ public:
     virtual ~ITriangleFactory() = default;
 
     virtual ITriangle* GetTriangle(
-        ITriangleArgsExtractor* extractor) const = 0;
+        const IExtractorArgs* args,
+        const ITriangleArgsExtractor* extractor) const = 0;
 
 };

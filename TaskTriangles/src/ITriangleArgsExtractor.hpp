@@ -8,7 +8,6 @@ class ITriangleArgsExtractor
 public:
     virtual ~ITriangleArgsExtractor() = default;
 
-    virtual void SetArgs(const IExtractorArgs*& args) = 0;
-    virtual std::string ExtractName() const = 0;
-    virtual std::vector<float> ExtractSides() const = 0;
+    virtual std::string ExtractName(const IExtractorArgs* args) const = 0;
+    virtual std::vector<float> ExtractSides(const IExtractorArgs* args) const = 0;
 };

@@ -31,8 +31,8 @@
 *.out
 *.app
 
-*/bin
-*/build
-*/.vscode
+**/bin
+**/build
+**/.vscode
 TaskFileParser/*.txt
-*/target
+**/target

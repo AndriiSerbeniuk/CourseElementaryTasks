@@ -27,7 +27,7 @@ fn main()
     // Library binding
     bindgen::Builder::default()
         .raw_line("#![allow(warnings)]")
-        .header("includes.hpp")
+        .header("Includes.hpp")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         .generate()
         .expect("Unable to generate bindings")

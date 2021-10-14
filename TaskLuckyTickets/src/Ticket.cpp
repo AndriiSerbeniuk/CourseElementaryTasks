@@ -2,12 +2,12 @@
 
 Ticket::Ticket(unsigned int number)
 {
-    set_number(number);
+    m_number = DivideToDigits(number);
 }
 
-void Ticket::set_number(unsigned int number)
+std::vector<char> Ticket::get_number() const
 {
-    m_number = DivideToDigits(number);
+    return m_number;
 }
 
 std::vector<char> Ticket::DivideToDigits(unsigned int number) const
@@ -20,9 +20,9 @@ std::vector<char> Ticket::DivideToDigits(unsigned int number) const
     {
         cur_digit = left_digits % 10;
         left_digits /= 10;
-        if (cur_digit)
+        if (left_digits || cur_digit)
         {
-            digits.push_back(cur_digit);
+            digits.push_back(cur_digit + '0');
         }
     } while (left_digits);   
 

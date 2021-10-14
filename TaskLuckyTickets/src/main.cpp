@@ -1,18 +1,35 @@
 #include <iostream>
-#include "TicketsCounter.hpp"
+// TODO: remove when finished with testing
+#include "LuckyFilter.hpp"
+#include "LuckyPredicates.hpp"
+#include "CitiesTable.hpp"
 
 int main()
 {
     // TODO: make a proper user interface
-    TicketsCounter counter;
-    std::vector<int> tickets {143341, 456654, 433658 };
-    std::string city("moscow");
-    int lucky_moscow = counter.Count(tickets, city);
-    city = "piter";
-    int lucky_piter = counter.Count(tickets, city);
-    std::cout << lucky_moscow << " " << lucky_piter << "\n";
-    city = "sochi";
-    int lucky_sochi = counter.Count(tickets, city);
+    std::vector<Ticket> tickets {1500, 150015, 143341, 456654, 433658, 314413 };
+
+    TicketCity city = CitiesTable::get_city("moscow");
+    bool (*pred)(const Ticket&) = CitiesTable::get_predicate(city);
+    LuckyFilter filter(tickets, pred);
+
+    int counter = 0;
+
+    for (auto t : filter)
+    {
+        ++counter;
+    }
+    std::cout << counter << "\n";
+
+    LuckyFilter filter2(tickets, CitiesTable::get_predicate(CitiesTable::get_city("piter")));
+
+    counter = 0;
+    
+    for (auto t : filter2)
+    {
+        ++counter;
+    }
+    std::cout << counter << "\n";
     
     return 0;
 }

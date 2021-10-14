@@ -5,9 +5,8 @@ class Ticket
 {
 public:
     Ticket(unsigned int number);
-    virtual ~Ticket() = default;
 
-    void set_number(unsigned int number);
+    std::vector<char> get_number() const;
 
 protected:
     std::vector<char> m_number;

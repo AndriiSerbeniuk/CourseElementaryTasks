@@ -6,7 +6,7 @@ class ChessBoard
 {
 public:
     ChessBoard(int width, int height);
-    virtual ~ChessBoard();
+    ~ChessBoard();
 
     int get_width() const;
     int get_height() const;

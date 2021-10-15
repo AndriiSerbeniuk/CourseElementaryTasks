@@ -42,3 +42,53 @@ fn main()
         println!("{}", board);
     }
 }
+
+#[cfg(test)]
+mod tests
+{
+    // Helper function.
+    // Returns String with the result of board drawing
+    fn get_board(w: i32, h: i32) -> String
+    {
+        unsafe
+        {
+            let mut cb_api = super::chess_board_lib::AccessApi::new();
+            let board_raw = cb_api.get_chessboard(w, h);   // May return error info as well
+            let board_c = std::ffi::CStr::from_ptr(board_raw);
+            let board = board_c.to_str().unwrap_or("Error");
+            board.to_string()
+        }
+    }
+
+    #[test]
+    fn three_by_three_board()
+    {
+        let board = get_board(3, 3);
+        let expected = "#_#\n\
+                        _#_\n\
+                        #_#\n".to_string();
+        assert_eq!(board, expected);
+    }
+
+    // Even width values are treated slightly differently internally
+    #[test]
+    fn four_by_five_board()
+    {
+        let board = get_board(4, 5);
+        let expected = "#_#_\n\
+                        _#_#\n\
+                        #_#_\n\
+                        _#_#\n\
+                        #_#_\n".to_string();
+        assert_eq!(board, expected);
+    }
+
+    // Covers cases when board side length is < 1
+    #[test]
+    fn zero_length()
+    {
+        let board = get_board(0, 1);
+        let expected = "Size of 0x1 is invalid. Each dimention must be > 0.".to_owned();
+        assert_eq!(board, expected);
+    }
+}

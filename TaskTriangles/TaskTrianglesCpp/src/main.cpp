@@ -1,8 +1,9 @@
 #include <iostream>
-#include "AccessFunctions.hpp"
+#include "UserDialog.hpp"
 
 int main() {
-    Run();
+    UserDialog d;
+    d.Run();
 
     return 0;
 }

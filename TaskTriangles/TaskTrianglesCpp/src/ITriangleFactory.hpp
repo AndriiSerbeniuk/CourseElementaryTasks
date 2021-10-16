@@ -3,6 +3,7 @@
 #include "ITriangleArgsExtractor.hpp"
 #include "ITriangle.hpp"
 
+// Base class for triangles factories
 class ITriangleFactory
 {
 public:

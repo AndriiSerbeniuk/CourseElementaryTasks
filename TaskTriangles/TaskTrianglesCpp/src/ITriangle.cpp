@@ -1,7 +1,8 @@
 #include <stdexcept>
 #include "ITriangle.hpp"
 
-ITriangle::ITriangle(float side1, float side2, float side3) : m_sides(3)
+ITriangle::ITriangle(std::string name, float side1, float side2, float side3) 
+    : m_sides(3), m_name(name)
 {
     m_sides[0] = side1;
     m_sides[1] = side2;

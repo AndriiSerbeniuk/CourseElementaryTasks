@@ -1,12 +1,12 @@
-#include "TriangleFactory.hpp"
-#include "Triangle.hpp"
+#include "AreaTriangleFactory.hpp"
+#include "AreaTriangle.hpp"
 
-ITriangle* TriangleFactory::GetTriangle(
+ITriangle* AreaTriangleFactory::GetTriangle(
     const IExtractorArgs* args,
     const ITriangleArgsExtractor* extractor) const
 {
     std::string name = extractor->ExtractName(args);
     std::vector<float> sides(extractor->ExtractSides(args));
 
-    return new Triangle(name, sides[0], sides[1], sides[2]);
+    return new AreaTriangle(name, sides[0], sides[1], sides[2]);
 }

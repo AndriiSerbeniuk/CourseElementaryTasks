@@ -1,20 +1,20 @@
 #include <stdexcept>
 #include <string.h>
 #include <algorithm>
-#include "StringExtractor.hpp"
+#include "StringArgsExtractor.hpp"
 
-std::string StringExtractor::ExtractName(const IExtractorArgs* args) const 
+std::string StringArgsExtractor::ExtractName(const IExtractorArgs* args) const 
 {
     const char *arg_start, *arg_end;
-    try
-    {
-        StringArgs* str_args = (StringArgs*)args;
-        arg_start = str_args->triangle_text.c_str(), arg_end = arg_start;
-    }
-    catch(const std::exception& e)
+
+    const StringArgs* str_args = dynamic_cast<const StringArgs*>(args);
+
+    if (!str_args)
     {
         throw std::invalid_argument("StringExtractor requires StringArgs implementation of IExtractorArgs");
     }
+
+    arg_start = str_args->triangle_text.c_str(), arg_end = arg_start;
 
     std::string name;
 
@@ -34,7 +34,7 @@ std::string StringExtractor::ExtractName(const IExtractorArgs* args) const
     return name;
 }
 
-std::vector<float> StringExtractor::ExtractSides(const IExtractorArgs* args) const
+std::vector<float> StringArgsExtractor::ExtractSides(const IExtractorArgs* args) const
 {
     const char *arg_start, *arg_end;
     try
@@ -92,7 +92,7 @@ std::vector<float> StringExtractor::ExtractSides(const IExtractorArgs* args) con
     return sides;
 }
 
-float StringExtractor::ProcessSide(const std::string& side) const
+float StringArgsExtractor::ProcessSide(const std::string& side) const
 {
     float side_len;
 
@@ -112,7 +112,7 @@ float StringExtractor::ProcessSide(const std::string& side) const
     return side_len;
 }
 
-void StringExtractor::Trim(std::string& str) const
+void StringArgsExtractor::Trim(std::string& str) const
 {
     auto not_space = [](char c) {
         return !isspace(c);

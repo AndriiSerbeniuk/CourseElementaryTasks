@@ -3,6 +3,7 @@
 #include <string>
 #include "IExtractorArgs.hpp"
 
+// Base class for triangle arguments extractors
 class ITriangleArgsExtractor
 {
 public:

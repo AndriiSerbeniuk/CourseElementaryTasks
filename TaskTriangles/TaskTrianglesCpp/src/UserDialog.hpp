@@ -2,23 +2,24 @@
 #include <iostream>
 #include <set>
 #include <memory>
-#include "Triangle.hpp"
-#include "TriangleFactory.hpp"
+#include "AreaTriangle.hpp"
+#include "AreaTriangleFactory.hpp"
 #include "StringArgs.hpp"
-#include "StringExtractor.hpp"
+#include "StringArgsExtractor.hpp"
 
 // Console user dialog
 class UserDialog {
 public:
-    void run();
+    void Run();
+    bool AskStart() const;
+    std::unique_ptr<AreaTriangle> AskTriangle() const;
+    void AddTriangle(const AreaTriangle& triangle);
+    std::string FormTrianglesTable() const;
 
 private:
+    static const char* ENTRY_PROMPT;
     // Triangles storage
-    std::multiset<Triangle, std::greater<Triangle>> m_triangles;
+    std::multiset<AreaTriangle, std::greater<AreaTriangle>> m_triangles;
 
-    static const char* kEntryPrompt;
-
-    bool ask_start();
-    std::unique_ptr<Triangle> ask_triangle();
-    void form_triangles_table();
+    char ToChar(const std::string& text) const;
 };

@@ -2,7 +2,9 @@
 #include "ITriangleArgsExtractor.hpp"
 #include "StringArgs.hpp"
 
-class StringExtractor : public ITriangleArgsExtractor
+// Triangle args extractor that extracts from std::string
+// Args format is: "name, side1, side2, side3" with any amount of whitespaces
+class StringArgsExtractor : public ITriangleArgsExtractor
 {
 public:
     std::string ExtractName(const IExtractorArgs* args) const override;

@@ -5,6 +5,7 @@ class Ticket
 {
 public:
     Ticket(unsigned int number);
+    Ticket(const std::vector<char>& number);
 
     std::vector<char> get_number() const;
 

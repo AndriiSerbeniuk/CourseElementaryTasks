@@ -17,12 +17,12 @@ bool LuckyPredicates::MoscowLucky(const Ticket& ticket)
 
         while (i < half_of_length)
         {
-            first_half_sum += number[i];
+            first_half_sum += number[i] - '0';
             i++;
         }
         while (i < length)
         {
-            second_half_sum += number[i];
+            second_half_sum += number[i] - '0';
             i++;
         }
 
@@ -47,6 +47,7 @@ bool LuckyPredicates::PiterLucky(const Ticket& ticket)
 
         for (char digit : number)
         {
+            digit -= '0';
             if (digit % 2)
             {
                 odd_sum += digit;

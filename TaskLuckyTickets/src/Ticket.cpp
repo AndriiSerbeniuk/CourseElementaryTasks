@@ -5,6 +5,9 @@ Ticket::Ticket(unsigned int number)
     m_number = DivideToDigits(number);
 }
 
+Ticket::Ticket(const std::vector<char>& number) : m_number(number)
+{}
+
 std::vector<char> Ticket::get_number() const
 {
     return m_number;

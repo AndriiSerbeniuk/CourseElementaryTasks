@@ -1,9 +1,10 @@
-#include "TicketsRangeGenerator.hpp"
+#include "TicketsRangeGen.hpp"
 
-typedef TicketsRangeGenerator::GenIterator gen_iter;
+using gen_iter = TicketsRangeGen::GenIterator;
 
 const char gen_iter::s_top_digit = '9';
 const char gen_iter::s_bottom_digit = '0';
+const Ticket gen_iter::s_end({ '\0' });
 
 gen_iter::GenIterator(const Ticket& begin, const Ticket& end)
     : m_begin(begin), m_end(end)
@@ -25,24 +26,26 @@ Ticket gen_iter::next()
     auto cur_digit = ticket_num.rbegin();
     auto end = ticket_num.rend();
 
+    // Find the digit to increment
     while (cur_digit != end)
     {
+        // Found it
         if (*cur_digit != s_top_digit)
         {
             ++(*cur_digit);
             cur_digit = end;
         }
-        else
+        else    // Increment next digit
         {
             if (cur_digit + 1 != end)
             {
                 *cur_digit = s_bottom_digit;
                 ++cur_digit;
             }
-            else
+            else    // If there are no digits left - we've reached the max possible number value
             {
                 cur_digit = end;
-                m_begin = m_end;    // Not sure about this
+                return s_end;
             }
         }
     }

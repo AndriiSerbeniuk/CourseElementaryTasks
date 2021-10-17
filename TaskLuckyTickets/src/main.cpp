@@ -3,7 +3,7 @@
 #include "LuckyFilter.hpp"
 #include "LuckyPredicates.hpp"
 #include "CitiesTable.hpp"
-#include "TicketsRangeGenerator.hpp"
+#include "TicketsRangeGen.hpp"
 
 int main()
 {
@@ -13,7 +13,6 @@ int main()
     TicketCity city = CitiesTable::get_city("moscow");
     bool (*pred)(const Ticket&) = CitiesTable::get_predicate(city);
     LuckyFilter<std::vector<Ticket>::const_iterator> filter(tickets.cbegin(), tickets.cend(), pred);
-
     int counter = 0;
 
     for (auto t : filter)
@@ -32,27 +31,20 @@ int main()
     }
     std::cout << counter << "\n";
     
-    TicketsRangeGenerator gen(
+    // Range processing testing
+    TicketsRangeGen gen(
         Ticket(std::vector<char>(6, '0')), 
         Ticket(std::vector<char>(6, '9')));
 
-    // for (auto gen_ticket : gen)
-    // {
-    //     for (auto dig : gen_ticket.get_number())
-    //     {
-    //         std::cout << dig;
-    //     }
-    //     std::cout << "\n";
-    // }
-
-    LuckyFilter<TicketsRangeGenerator::GenIterator> filter3(gen.begin(), gen.end(), 
-        CitiesTable::get_predicate(CitiesTable::get_city("moscow")));
+    LuckyFilter<TicketsRangeGen::GenIterator> filter3(gen.begin(), gen.end(), 
+        LuckyPredicates::MoscowLucky);
     counter = 0;
     
     for (auto t : filter3)
     {
         ++counter;
     }
+    
     std::cout << counter << "\n";
 
     return 0;

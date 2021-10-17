@@ -1,3 +1,4 @@
+#include <string.h>
 #include "Ticket.hpp"
 
 Ticket::Ticket(unsigned int number)
@@ -7,6 +8,15 @@ Ticket::Ticket(unsigned int number)
 
 Ticket::Ticket(const std::vector<char>& number) : m_number(number)
 {}
+
+Ticket::Ticket(const char* number)
+{
+    int len = strlen(number);
+    for (int i = 0; i < len; i++)
+    {
+        m_number.push_back(number[i]);
+    }
+}
 
 std::vector<char> Ticket::get_number() const
 {

@@ -3,6 +3,7 @@
 #include "TicketCity.hpp"
 #include "Ticket.hpp"
 
+// Static table of city codes and their respective possible values
 class CitiesTable
 {
 public:
@@ -13,7 +14,7 @@ public:
     static bool (*get_predicate(TicketCity city)) (const Ticket&);
 
 private:
-    // Map of city codes based on their names // TODO: not sure if using text as keys is a right way
+    // Map of city codes based on their names
     static const std::map<const std::string, TicketCity> s_strings_cities;
     // Map of luckiness predicates for cities
     static const std::map<TicketCity, bool (*)(const Ticket&)> s_cities_predicates;

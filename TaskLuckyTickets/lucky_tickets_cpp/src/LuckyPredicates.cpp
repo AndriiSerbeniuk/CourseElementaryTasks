@@ -2,6 +2,7 @@
 
 unsigned int LuckyPredicates::s_lucky_length = 6;
 
+// Returns true if sum of first half of the number is equal to the sum of the second half
 bool LuckyPredicates::MoscowLucky(const Ticket& ticket)
 {
     std::vector<char> number = ticket.get_number();
@@ -35,6 +36,7 @@ bool LuckyPredicates::MoscowLucky(const Ticket& ticket)
     return is_lucky;
 }
 
+// Returns true if sum of even digits is equal to the sum of odd digits
 bool LuckyPredicates::PiterLucky(const Ticket& ticket)
 {
     std::vector<char> number = ticket.get_number();

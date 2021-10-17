@@ -3,7 +3,8 @@
 #include "Ticket.hpp"
 #include "LuckyIterator.hpp"
 
-// Wrapper for a vector of tickets that iterates only on the tickets that suit the given predicate
+// Wrapper for a container of Tickets
+// Iterates only on the Tickets that suit the given predicate
 template<class iter>
 class LuckyFilter
 {

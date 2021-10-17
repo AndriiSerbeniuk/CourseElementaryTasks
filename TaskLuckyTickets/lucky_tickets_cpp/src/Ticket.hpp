@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 
+// Ticket with a number, repserented as a vector of char digits
 class Ticket
 {
 public:

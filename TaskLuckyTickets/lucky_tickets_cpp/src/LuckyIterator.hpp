@@ -1,7 +1,8 @@
 #pragma once
 #include "Ticket.hpp"
 
-// const iterator on a vector of tickets that skips tickets that don't suit the predicate
+// Iterator on a container of Tickets
+// Skips tickets that don't suit the predicate
 template<class iter>
 struct LuckyIterator
 {

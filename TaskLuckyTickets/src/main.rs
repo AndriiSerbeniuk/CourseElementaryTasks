@@ -1,8 +1,64 @@
 #![allow(non_snake_case)]
 mod lucky_tickets_lib;
 
-fn main() {
-    
+use std::ffi::CString;
+use lucky_tickets_lib::*;
+use std::io::prelude::Read;
+
+fn main() 
+{
+    // Getting file path
+    let mut filepath = String::new();
+    println!("Enter the path to the algorithm file:");
+
+    match std::io::stdin().read_line(&mut filepath)
+    {
+        Ok(_) => filepath = filepath.trim().to_string(),
+        Err(error) => 
+        {
+            println!("{}", error);
+            return;
+        }
+    }
+    // Reading the file
+    let mut file = std::fs::File::open(filepath).expect("Eror while openng the file");
+    const MAX_READ_LENGTH: usize = 10;
+    let mut file_contents: [u8; MAX_READ_LENGTH] = [0; 10];
+
+    file.read(&mut file_contents).expect("Error while reading the file");
+
+    let city_name = CString::new(file_contents).expect("Error while reading file contents");
+    // Processing file contents
+    unsafe
+    {
+        if IsCityValid(city_name.as_ptr())
+        {
+            println!("City name of {:?} is valid.", city_name); 
+        }
+        else
+        {
+            println!("City name is not valid. Valid names are: Moscow, Piter");
+        }
+    }
+    // Counting lucky tickets
+    let range_start = CString::new("000000").unwrap();
+    let range_end = CString::new("999999").unwrap();
+
+    unsafe
+    {
+        let lucky_count = CountLucky(range_start.as_ptr(), range_end.as_ptr(),
+            city_name.as_ptr());
+        
+        if -1 == lucky_count
+        {
+            println!("Error while counting lucky tickets.");
+        }
+        else
+        {
+            println!("Number of lucky {:?} tickets in the {:?}-{:?} range is: {}.",
+                city_name, range_start, range_end, lucky_count);
+        }
+    }
 }
 
 #[cfg(test)]

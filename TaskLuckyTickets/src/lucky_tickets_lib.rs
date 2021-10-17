@@ -17,3 +17,7 @@ extern "C" {
         city_name: *const ::std::os::raw::c_char,
     ) -> bool;
 }
+extern "C" {
+    #[link_name = "\u{1}_Z11IsCityValidPKc"]
+    pub fn IsCityValid(city_name: *const ::std::os::raw::c_char) -> bool;
+}

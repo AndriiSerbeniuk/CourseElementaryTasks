@@ -52,3 +52,8 @@ bool IsLucky(const char* ticket_num, const char* city_name)
     
     return lucky;
 }
+
+bool IsCityValid(const char* city_name)
+{
+    return UNKNOWN != CitiesTable::get_city(city_name);
+}

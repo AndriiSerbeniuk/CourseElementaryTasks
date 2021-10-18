@@ -32,11 +32,16 @@ mod tests
 {
     fn get_triangle(args: &std::ffi::CString) -> *mut std::ffi::c_void
     {
+        let triangle;
+
         unsafe
         {
             let mut dialog = super::triangles_lib::TrianglesApi::new();
-            dialog.GetTriangle(args.as_ptr())
+            triangle = dialog.GetTriangle(args.as_ptr());
+            dialog.destruct();
         }
+
+        triangle
     }
 
     #[test]

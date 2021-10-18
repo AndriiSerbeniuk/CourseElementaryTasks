@@ -40,6 +40,8 @@ fn main()
         let board_c = std::ffi::CStr::from_ptr(board_raw);
         let board = board_c.to_str().unwrap_or("Error");
         println!("{}", board);
+
+        cb_api.destruct();
     }
 }
 
@@ -56,6 +58,8 @@ mod tests
             let board_raw = cb_api.get_chessboard(w, h);   // May return error info as well
             let board_c = std::ffi::CStr::from_ptr(board_raw);
             let board = board_c.to_str().unwrap_or("Error");
+            cb_api.destruct();
+            
             board.to_string()
         }
     }

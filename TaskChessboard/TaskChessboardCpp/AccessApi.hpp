@@ -12,8 +12,8 @@ public:
     char* get_chessboard(int width, int height);
 
 private:
-    bool m_allocated;
     char* m_board;
+    bool m_allocated;
 
     void ClearBoard();
 };

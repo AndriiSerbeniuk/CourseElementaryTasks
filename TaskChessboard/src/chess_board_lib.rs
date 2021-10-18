@@ -5,8 +5,8 @@
 #[repr(C)]
 #[derive(Debug)]
 pub struct AccessApi {
-    pub m_allocated: bool,
     pub m_board: *mut ::std::os::raw::c_char,
+    pub m_allocated: bool,
 }
 #[test]
 fn bindgen_test_layout_AccessApi() {
@@ -21,23 +21,23 @@ fn bindgen_test_layout_AccessApi() {
         concat!("Alignment of ", stringify!(AccessApi))
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<AccessApi>())).m_allocated as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<AccessApi>())).m_board as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
             stringify!(AccessApi),
             "::",
-            stringify!(m_allocated)
+            stringify!(m_board)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<AccessApi>())).m_board as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<AccessApi>())).m_allocated as *const _ as usize },
         8usize,
         concat!(
             "Offset of field: ",
             stringify!(AccessApi),
             "::",
-            stringify!(m_board)
+            stringify!(m_allocated)
         )
     );
 }

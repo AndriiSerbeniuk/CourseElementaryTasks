@@ -3,7 +3,6 @@ mod lucky_tickets_lib;
 
 use std::ffi::CString;
 use lucky_tickets_lib::*;
-use std::io::prelude::Read;
 
 fn main() 
 {
@@ -21,13 +20,8 @@ fn main()
         }
     }
     // Reading the file
-    let mut file = std::fs::File::open(filepath).expect("Eror while openng the file");
-    const MAX_READ_LENGTH: usize = 10;
-    let mut file_contents: [u8; MAX_READ_LENGTH] = [0; 10];
-
-    file.read(&mut file_contents).expect("Error while reading the file");
-
-    let city_name = CString::new(file_contents).expect("Error while reading file contents");
+    let file_contents = std::fs::read_to_string(filepath).expect("Error while reading the file");
+    let city_name = CString::new(file_contents).expect("Error while interpreting file contents");
     // Processing file contents
     unsafe
     {

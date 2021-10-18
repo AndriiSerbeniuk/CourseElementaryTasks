@@ -20,6 +20,7 @@ int CountLucky(const char* range_start, const char* range_end,
         Ticket end(range_end);
         TicketsRangeGen gen(begin, end);
         bool (*pred)(const Ticket&) = GetCityLuckyPredicate(city_name);
+        
         if (pred)
         {
             LuckyFilter<TicketsRangeGen::GenIterator> filter(gen.begin(), gen.end(), pred);

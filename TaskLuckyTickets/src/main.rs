@@ -20,8 +20,10 @@ fn main()
         }
     }
     // Reading the file
-    let file_contents = std::fs::read_to_string(filepath).expect("Error while reading the file");
-    let city_name = CString::new(file_contents).expect("Error while interpreting file contents");
+    let file_contents = std::fs::read_to_string(filepath)
+        .expect("Error while reading the file").to_lowercase();
+    let city_name = CString::new(file_contents)
+        .expect("Error while interpreting file contents");
     // Processing file contents
     unsafe
     {
@@ -32,6 +34,7 @@ fn main()
         else
         {
             println!("City name is not valid. Valid names are: Moscow, Piter");
+            return;
         }
     }
     // Counting lucky tickets

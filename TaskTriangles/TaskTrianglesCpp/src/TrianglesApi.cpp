@@ -3,18 +3,18 @@
 #include "UserDialog.hpp"
 
 TrianglesApi::TrianglesApi() 
-    : 
-    m_created_triangles(new std::vector<AreaTriangle*>),
-    m_user_dialog(new UserDialog()),
-    m_last_table(nullptr)
-{}
+{
+    m_created_triangles = new std::vector<AreaTriangle*>;
+    m_user_dialog = new UserDialog();
+    m_last_table = nullptr;
+}
 
 TrianglesApi::~TrianglesApi()
 {
-    delete m_user_dialog;
+    delete static_cast<UserDialog*>(m_user_dialog);
     ClearLastTable();
     ClearTriangles();
-    delete m_created_triangles;
+    delete static_cast<std::vector<AreaTriangle*>*>(m_created_triangles);
 }
 
 bool TrianglesApi::AskStart() const

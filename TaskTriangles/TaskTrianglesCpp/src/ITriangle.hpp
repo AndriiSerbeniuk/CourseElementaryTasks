@@ -10,8 +10,8 @@ public:
     virtual ~ITriangle() = default;
 
 protected:
-    std::string m_name;
     std::vector<float> m_sides;
+    std::string m_name;
 
     // Returns false if either of the sides is biger than sum of other two
     bool AreSidesValid() const;

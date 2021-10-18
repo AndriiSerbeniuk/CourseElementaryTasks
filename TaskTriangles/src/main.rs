@@ -5,13 +5,15 @@ fn main()
     unsafe
     {
         let mut dialog = triangles_lib::TrianglesApi::new();
+        
         while dialog.AskStart()
         {
             dialog.AskTriangle();
             let table = cstr_to_string(dialog.FormTrianglesTable());
             println!("{}", table);
         }
-        
+
+        dialog.destruct();
     }
 }
 

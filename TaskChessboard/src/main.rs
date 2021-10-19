@@ -1,7 +1,9 @@
+#![allow(non_snake_case)]
 mod chess_board_lib;
 
 fn main() 
 {
+    // Get command line args
     let mut args = std::env::args();
 
     if args.len() != 3
@@ -10,7 +12,7 @@ fn main()
         println!("Required arguments are: width height. Both arguments should be int > 0");
         return;
     }
-
+    // Process args
     args.next();    // Skip executable path
     let mut wrong_arg = false;
     let width_str = args.next().unwrap();
@@ -32,7 +34,7 @@ fn main()
         println!("Sides of a chessboard must be int > 0");
         return;
     }
-
+    // Draw the chessboard
     unsafe
     {
         let mut cb_api = chess_board_lib::AccessApi::new();

@@ -15,13 +15,16 @@ const std::vector<std::map<ChessPieceType, char>> StringDrawer::s_pieces_chars
 };
 
 StringDrawer::StringDrawer(const ChessBoard* board, std::string& target_string) 
-    : ChessBoardDrawer(board), m_target(target_string) {}
+    : ChessBoardDrawer(board), m_target(target_string) 
+{}
 
-void StringDrawer::Draw() {
+void StringDrawer::Draw() 
+{
     m_target.clear();
     int w = m_board->get_width(), h = m_board->get_height();
     bool board_col = m_start_white;
     const ChessPiece* cur_piece = nullptr;
+
     for (int y = 0; y < h; y++) 
     {
         for (int x = 0; x < w; x++) 
